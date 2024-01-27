@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+body{
+    background-color: rgb(67, 67, 214);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+}
+
+#form_fundo{
+    background-color: aliceblue;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 5px 5px 5px black;
+    width: 500px;
+}
+
+#btn_login{
+    background-color: black;
+    color:aliceblue;
+    cursor: pointer;
+    width: 18%;
+    height:25px;
+    border-radius: 20px;
+}
+
+#btn_login:hover{
+    background-color: aliceblue;
+    color:black;
+}
+
+
+label{
+    font-size:20px;
+    font-weight: bold;
+}
+
+input{
+    border-radius: 18px;
+    font-size: 17px;
+}
+
