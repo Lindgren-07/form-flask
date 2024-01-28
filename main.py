@@ -1,9 +1,10 @@
 
 
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, flash
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://DESKTOP-JIN1HLA/teste?driver=ODBC+Driver+17+for+SQL+Server'
+app.secret_key = 'joao07'
 
 @app.route('/')
 def home():
@@ -15,10 +16,12 @@ def login():
 
     nome = request.form.get('nome')
     senha = request.form.get('senha')
-    print(nome)
-    print(senha)
-
-    return redirect('/')
+   
+    if nome == 'joao' and senha == '123':
+        return render_template('usuario.html')
+    else:
+        flash('Usuário inválido, tente novamente')
+        return redirect('/')
 
 
 if __name__ == "__main__":

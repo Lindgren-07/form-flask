@@ -1,11 +1,16 @@
 @charset "UTF-8";
 
-body{
+#corpo{
     background-color: rgb(67, 67, 214);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    gap: 80px;
     align-items: center;
     padding-top: 100px;
+}
+
+#corpo2{
+    background-color: rgb(67, 67, 214);
 }
 
 #form_fundo{
@@ -40,5 +45,19 @@ label{
 input{
     border-radius: 18px;
     font-size: 17px;
+}
+
+.flash_alerta{
+    color: aliceblue;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: red;
+    border-radius: 20px;
+    text-align: center;
+    width: 18%;
+    height: 40px;
+    box-shadow: 5px 5px black;
+    
 }
 
