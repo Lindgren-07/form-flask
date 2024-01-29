@@ -33,6 +33,25 @@ def login():
             if cont >= len(usuarios):
                flash('Usuário inválido, tente novamente')
                return redirect('/')
+            
+@app.route('/cadastrarUsuario', methods=['POST'])
+def cadastrarUsuario():
+    user = []
+    nome = request.form.get('nome')
+    senha = request.form.get('senha')
+    user = [
+        {"nome":nome,"senha":senha}
+    ]
+
+    with open('usuarios.json') as usuariosTemp:
+        usuarios = json.load(usuariosTemp)
+    
+    novoUsuario = usuarios + user
+
+    with open('usuarios.json', 'w') as gravarTemp:
+        json.dump(novoUsuario,gravarTemp, indent=2)
+
+    return render_template('adm.html')
     
 
    
