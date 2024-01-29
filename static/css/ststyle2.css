@@ -1,0 +1,36 @@
+@import url(ststyle.css);
+
+#corpo3{
+    background-color: rgb(97, 3, 3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#form_fundo{
+    background-color: aliceblue;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 5px 5px 5px black;
+    width: 500px;
+}
+#btn_login:hover{
+    background-color: darkgreen;
+    color:white;
+}
+
+#titulo{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color:aliceblue;
+}
+
+
+#btn_login{
+    background-color: black;
+    color:aliceblue;
+    cursor: pointer;
+    width: 20%;
+    height:25px;
+    border-radius: 20px;
+}

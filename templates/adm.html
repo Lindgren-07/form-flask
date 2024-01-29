@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>formulário</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/static/css/ststyle2.css">
+</head>
+
+<body id="corpo3">
+    {% set menssagem = get_flashed_messages() %}
+    {% if menssagem%}
+        <div class="flash_alerta">
+            {{menssagem[0]}}
+        </div>
+    {% endif %}
+    <h1 id="titulo">ADMINISTRADOR</h1>
+    <div id="form_fundo">
+        <h1>Cadastrar Usuário</h1>
+        <h1></h1>
+        <div id="form_frente">
+            <form action="/cadastrarUsuario" id="login" method="post">
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome" required placeholder="digite seu nome aqui">
+                <br>
+                <br>
+                <label for="senha">Senha:</label>
+                <input type="text" name="senha" id="senha" required placeholder="digite sua senha aqui">
+                <br>
+                <br>
+                <button type="submit" id="btn_login">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>CADASTRAR
+                </button>
+
+
+            </form>
+        </div>
+    </div>
+
+
+
+</body>
+
+
+</html>
