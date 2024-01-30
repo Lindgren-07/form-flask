@@ -40,6 +40,27 @@
         </div>
     </div>
 
+    <div id="usuarioFrente">
+        <h1 id="usuariosCad">Usuários cadastrados</h1>
+        <div id="usuarioFundo">
+            {% if usuarios %}
+                {% for i in usuarios%}
+                    <ul id="lista">
+                        <li>Nome: {{i['nome']}}</li>
+                        <li>Senha: {{i['senha']}}</li>
+                    </ul>
+                    <hr id="linha"></hr>
+
+
+                {% endfor %}
+
+            {% else %}
+            <h1>não existe usuários cadastrados</h1>
+            {% endif %}
+
+        </div>
+    </div>
+
 
 
 </body>

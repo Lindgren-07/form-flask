@@ -7,13 +7,29 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://DESKTOP-JIN1HLA/teste?driver=ODBC+Driver+17+for+SQL+Server'
 app.secret_key = 'joao07'
 
+logado = False
+
 @app.route('/')
 def home():
+    global logado
+    logado = False
     return render_template('login.html')
+
+@app.route('/adm')
+def adm():
+    if logado == True:
+        with open('usuarios.json') as cadastrados:
+            usuarios = json.load(cadastrados)
+
+        return render_template('adm.html',usuarios=usuarios)
+    if logado == False:
+       return redirect('/')
 
 
 @app.route('/login',methods=['POST'])
 def login():
+
+    global logado
 
     nome = request.form.get('nome')
     senha = request.form.get('senha')
@@ -25,7 +41,8 @@ def login():
             cont+=1
 
             if nome == 'adm' and senha == '000':
-                return render_template('adm.html')
+                logado = True
+                return redirect('/adm')
 
             if usuario['nome'] == nome and usuario['senha'] == senha:
                 return render_template('usuario.html')
@@ -51,7 +68,7 @@ def cadastrarUsuario():
     with open('usuarios.json', 'w') as gravarTemp:
         json.dump(novoUsuario,gravarTemp, indent=2)
 
-    return render_template('adm.html')
+    return redirect('/adm')
     
 
    

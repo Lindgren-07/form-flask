@@ -34,3 +34,24 @@
     height:25px;
     border-radius: 20px;
 }
+
+#usuarioFundo{
+    background-color: aliceblue;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 5px 5px 5px black;
+    width: 500px;
+    overflow-y: scroll;
+
+}
+
+#usuariosCad{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color:aliceblue;
+}
+
+#linha{
+    width: 80%;
+    height: 8px;
+    border: 1px dashed darkred;
+}
