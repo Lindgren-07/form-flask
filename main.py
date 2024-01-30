@@ -2,6 +2,7 @@
 
 from flask import Flask, render_template, redirect, request, flash
 import json
+import ast
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://DESKTOP-JIN1HLA/teste?driver=ODBC+Driver+17+for+SQL+Server'
@@ -53,6 +54,7 @@ def login():
             
 @app.route('/cadastrarUsuario', methods=['POST'])
 def cadastrarUsuario():
+    global logado
     user = []
     nome = request.form.get('nome')
     senha = request.form.get('senha')
@@ -67,7 +69,27 @@ def cadastrarUsuario():
 
     with open('usuarios.json', 'w') as gravarTemp:
         json.dump(novoUsuario,gravarTemp, indent=2)
+    logado = True
+    flash(f'{nome} cadastrado!')
 
+    return redirect('/adm')
+
+@app.route('/excluirUsuario', methods=['POST'])
+def excluirUsuario():
+    global logado
+    logado = True
+    usuario = request.form.get('usuarioParaExcluir')
+    usuarioDict = ast.literal_eval(usuario)
+    nome = usuarioDict['nome']
+    with open('usuarios.json') as usuariosTemp:
+        usuarioPy = json.load(usuariosTemp)
+        for i in usuarioPy:
+            if i == usuarioDict:
+                usuarioPy.remove(usuarioDict)
+                with open('usuarios.json','w') as usuarioAexcluir:
+                    json.dump(usuarioPy,usuarioAexcluir,indent=2)
+
+    flash(f'{nome} excluido com sucesso')
     return redirect('/adm')
     
 

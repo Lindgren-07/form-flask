@@ -55,3 +55,25 @@
     height: 8px;
     border: 1px dashed darkred;
 }
+
+#excluir{
+    width: 20%;
+    height:25px;
+    color:aliceblue;
+    background-color: black;
+    box-shadow: 2px 2px 2px red;
+    border-radius: 20px;
+    
+}
+
+#excluir:hover{
+    background-color: darkred;
+    color:black;
+    cursor: pointer;
+}
+
+#btnExcluir{
+    display: flex;
+    justify-content: center;
+    
+}

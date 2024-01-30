@@ -1,13 +1,5 @@
 [
   {
-    "nome": "arthur",
-    "senha": "1234"
-  },
-  {
-    "nome": "ana",
-    "senha": "333"
-  },
-  {
     "nome": "joao",
     "senha": "123"
   },
@@ -18,5 +10,9 @@
   {
     "nome": "sara",
     "senha": "154"
+  },
+  {
+    "nome": "vitor",
+    "senha": "345"
   }
 ]
