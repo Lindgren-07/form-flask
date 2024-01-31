@@ -3,6 +3,7 @@
 from flask import Flask, render_template, redirect, request, flash
 import json
 import ast
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://DESKTOP-JIN1HLA/teste?driver=ODBC+Driver+17+for+SQL+Server'
@@ -92,6 +93,20 @@ def excluirUsuario():
     flash(f'{nome} excluido com sucesso')
     return redirect('/adm')
     
+@app.route('/upload', methods=['POST'])
+def upload():
+    global logado
+    logado=True
+
+    arquivo = request.files.get('documento')
+    nome_arquivo = arquivo.filename.replace(" ","-")
+    arquivo.save(os.path.join('arquivos/', nome_arquivo))
+
+    flash('ARQUIVO SALVO')
+
+
+    return redirect('/adm')
+
 
    
    
