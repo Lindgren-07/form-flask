@@ -1,0 +1,23 @@
+@import url(../css/ststyle.css);
+
+#corpo2{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    background-color: black;
+    padding-top: 200px;
+}
+
+#btnDownload{
+background-color: black;
+color:aliceblue;
+cursor: pointer;
+width: 20%;
+height:25px;
+border-radius: 20px;
+}
+
+#btnDownload:hover{
+    background-color: darkgreen;
+    color:white;
+}
