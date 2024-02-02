@@ -1,11 +1,28 @@
-
 from flask import Flask, render_template, redirect, request, flash, send_from_directory
 import json
 import ast
 import os
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column,String,Integer
+from sqlalchemy.orm import sessionmaker
+
+
+
+engine = create_engine('mssql+pyodbc://DESKTOP-3NB93KR/cadastro?driver=ODBC+Driver+17+for+SQL+Server')
+Base = declarative_base()
+Session = sessionmaker(bind=engine)
+session = Session()
+
+class Usuario(Base):
+    __tablename__ = 'usuario'
+    id_usuario = Column(Integer,primary_key=True)
+    nome_usuario = Column(String,nullable=False)
+    senha_usuario = Column(String,nullable=False)
+    
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://DESKTOP-JIN1HLA/teste?driver=ODBC+Driver+17+for+SQL+Server'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://DESKTOP-3NB93KR/cadastro?driver=ODBC+Driver+17+for+SQL+Server'
 app.secret_key = 'joao07'
 
 logado = False
@@ -46,22 +63,22 @@ def login():
 
     nome = request.form.get('nome')
     senha = request.form.get('senha')
+    usuariosBD = session.query(Usuario).all()
 
-    with open('usuarios.json') as usuariosTemp:
-        usuarios = json.load(usuariosTemp)
-        cont = 0
-        for usuario in usuarios:
+    cont = 0
+    for usuario in usuariosBD:
             cont+=1
-
+            usuarioNome = usuario.nome_usuario
+            usuarioSenha = usuario.senha_usuario
             if nome == 'adm' and senha == '000':
                 logado = True
                 return redirect('/adm')
 
-            if usuario['nome'] == nome and usuario['senha'] == senha:
+            if usuarioNome == nome and usuarioSenha == senha:
                 logado=True
                 return redirect('/usuarios')
             
-            if cont >= len(usuarios):
+            if cont >= len(usuariosBD):
                flash('Usuário inválido, tente novamente')
                return redirect('/')
             
@@ -71,6 +88,9 @@ def cadastrarUsuario():
     user = []
     nome = request.form.get('nome')
     senha = request.form.get('senha')
+    '''novo_usuario = Usuario(nome_usuario=nome,senha_usuario=senha)
+    Session.add(novo_usuario)
+    Session.commit()'''
     user = [
         {"nome":nome,"senha":senha}
     ]
@@ -131,3 +151,4 @@ def download():
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
+    Base.metadata.create_all(bind=engine)
