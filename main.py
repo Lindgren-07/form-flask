@@ -85,23 +85,11 @@ def login():
 @app.route('/cadastrarUsuario', methods=['POST'])
 def cadastrarUsuario():
     global logado
-    user = []
     nome = request.form.get('nome')
     senha = request.form.get('senha')
-    '''novo_usuario = Usuario(nome_usuario=nome,senha_usuario=senha)
-    Session.add(novo_usuario)
-    Session.commit()'''
-    user = [
-        {"nome":nome,"senha":senha}
-    ]
-
-    with open('usuarios.json') as usuariosTemp:
-        usuarios = json.load(usuariosTemp)
-    
-    novoUsuario = usuarios + user
-
-    with open('usuarios.json', 'w') as gravarTemp:
-        json.dump(novoUsuario,gravarTemp, indent=2)
+    novo_usuario = Usuario(nome_usuario=nome,senha_usuario=senha)
+    session.add(novo_usuario)
+    session.commit()
     logado = True
     flash(f'{nome} cadastrado!')
 
