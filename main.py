@@ -38,8 +38,7 @@ def home():
 @app.route('/adm')
 def adm():
     if logado == True:
-        with open('usuarios.json') as cadastrados:
-            usuarios = json.load(cadastrados)
+        usuarios = session.query(Usuario).all()
 
         return render_template('adm.html',usuarios=usuarios)
     if logado == False:
@@ -99,16 +98,11 @@ def cadastrarUsuario():
 def excluirUsuario():
     global logado
     logado = True
-    usuario = request.form.get('usuarioParaExcluir')
-    usuarioDict = ast.literal_eval(usuario)
-    nome = usuarioDict['nome']
-    with open('usuarios.json') as usuariosTemp:
-        usuarioPy = json.load(usuariosTemp)
-        for i in usuarioPy:
-            if i == usuarioDict:
-                usuarioPy.remove(usuarioDict)
-                with open('usuarios.json','w') as usuarioAexcluir:
-                    json.dump(usuarioPy,usuarioAexcluir,indent=2)
+
+    nome = request.form.get('nome')
+    excluir_usuario = request.form.get('usuarioParaExcluir')
+    session.query(Usuario).filter(Usuario.id_usuario == excluir_usuario).delete()
+    session.commit()
 
     flash(f'{nome} excluido com sucesso')
     return redirect('/adm')
