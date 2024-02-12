@@ -9,7 +9,7 @@ from sqlalchemy.orm import sessionmaker
 
 
 
-engine = create_engine('postgresql://postgres:jlindgren@localhost:5432/cadastro')
+engine = create_engine('postgresql://postgres:jlindgren@localhost:5433/cadastro')
 Base = declarative_base()
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -22,7 +22,7 @@ class Usuario(Base):
     
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:jlindgren@localhost:5432/cadastro'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:jlindgren@localhost:5433/cadastro'
 app.secret_key = 'joao07'
 
 logado = False
