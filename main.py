@@ -9,7 +9,7 @@ from sqlalchemy.orm import sessionmaker
 
 
 
-engine = create_engine('mssql+pyodbc://DESKTOP-3NB93KR/cadastro?driver=ODBC+Driver+17+for+SQL+Server')
+engine = create_engine('postgresql://postgres:jlindgren@localhost:5432/cadastro')
 Base = declarative_base()
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -22,7 +22,7 @@ class Usuario(Base):
     
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://DESKTOP-3NB93KR/cadastro?driver=ODBC+Driver+17+for+SQL+Server'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:jlindgren@localhost:5432/cadastro'
 app.secret_key = 'joao07'
 
 logado = False
