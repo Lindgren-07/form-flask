@@ -64,15 +64,19 @@ def login():
     senha = request.form.get('senha')
     usuariosBD = session.query(Usuario).all()
 
+
+
     cont = 0
+
+    if nome == 'adm' and senha == '000':
+                logado = True
+                return redirect('/adm')
+    
     for usuario in usuariosBD:
             cont+=1
             usuarioNome = usuario.nome_usuario
             usuarioSenha = usuario.senha_usuario
-            if nome == 'adm' and senha == '000':
-                logado = True
-                return redirect('/adm')
-
+           
             if usuarioNome == nome and usuarioSenha == senha:
                 logado=True
                 return redirect('/usuarios')
